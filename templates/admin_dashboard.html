@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>All Appointments</h2>
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Patient</th>
+      <th>Doctor</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for app in appointments %}
+    <tr>
+      <td>{{ app.id }}</td>
+      <td>{{ app.patient.email }}</td>
+      <td>{{ app.doctor.name }}</td>
+      <td>{{ app.start_time.strftime('%Y-%m-%d %H:%M') }}</td>
+      <td>{{ app.end_time.strftime('%Y-%m-%d %H:%M') }}</td>
+      <td>
+        <a href="{{ url_for('cancel_appointment', appointment_id=app.id) }}" onclick="return confirm('Are you sure?')">Cancel</a> |
+        <a href="{{ url_for('add_prescription', appointment_id=app.id) }}">Add Prescription</a>
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6">No appointments yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

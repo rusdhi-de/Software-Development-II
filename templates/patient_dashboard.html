@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>My Appointments</h2>
+<ul>
+  {% for app in appointments %}
+  <li>
+    With Dr. {{ app.doctor.name }} on {{ app.start_time.strftime('%Y-%m-%d %H:%M') }}
+    {% if app.prescription %}
+      - Prescription available
+    {% endif %}
+  </li>
+  {% else %}
+  <li>No appointments yet.</li>
+  {% endfor %}
+</ul>
+
+<h2>My Prescriptions</h2>
+<ul>
+  {% for pres in prescriptions %}
+  <li>
+    Appointment on {{ pres.appointment.start_time.strftime('%Y-%m-%d %H:%M') }}:
+    <pre>{{ pres.details }}</pre>
+  </li>
+  {% else %}
+  <li>No prescriptions yet.</li>
+  {% endfor %}
+</ul>
+
+{% if medicine_reminders %}
+<h2>Medicine Reminders</h2>
+<ul>
+  {% for rem in medicine_reminders %}
+  <li>
+    Appointment on {{ rem.appointment.start_time.strftime('%Y-%m-%d %H:%M') }}: Take medicine reminder!
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

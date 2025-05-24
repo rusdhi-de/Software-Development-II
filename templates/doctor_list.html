@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Available Doctors</h2>
+<ul>
+  {% for doctor in doctors %}
+  <li>
+    <strong>{{ doctor.name }}</strong> ({{ doctor.specialization }}) -
+    <a href="{{ url_for('book_appointment', doctor_id=doctor.id) }}">Book Appointment</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

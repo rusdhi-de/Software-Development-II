@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Book Appointment with {{ doctor.name }}</h2>
+<form method="POST">
+  <label>Select Date & Time (30-minute slots only):</label><br/>
+  <input type="datetime-local" name="start_time" required><br/><br/>
+  <input type="submit" value="Book Appointment">
+</form>
+{% endblock %}
